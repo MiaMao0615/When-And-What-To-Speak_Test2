@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 构建产物
+dist/
+dist-ssr/
+*.local
+
+# 实验日志（CSV文件通常很大，不上传）
+experiment_logs/
+*.csv
+
+# 环境变量和配置（可能包含敏感信息）
+.env
+.env.local
+*.key
+
+# IDE和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
