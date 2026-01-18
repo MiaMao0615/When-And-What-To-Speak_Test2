@@ -90,15 +90,26 @@ npm install
 
 ### 配置模型路径（LoRA系统）
 
-编辑 `backend/Core.py`，修改以下路径：
+模型已上传至 Hugging Face，可以直接使用：
+
+**Hugging Face 模型仓库：** [MiaMao/Autonomous-Insert-LoRA](https://huggingface.co/MiaMao/Autonomous-Insert-LoRA)
+
+**相关资源：**
+- **训练数据集：** [MiaMao/Autonomous-Insert-Data](https://huggingface.co/datasets/MiaMao/Autonomous-Insert-Data)
+- **完整运行时代码：** [Autonomous-Insert-Agent](https://github.com/MiaMao0615/Autonomous-Insert-Agent)
+
+编辑 `backend/Core.py`，使用 Hugging Face 模型路径：
 
 ```python
-BASE_MODEL = r"D:\LLM\Qwen2.5-7B-Instruct"
+BASE_MODEL = "Qwen/Qwen2.5-7B-Instruct"  # 或使用本地路径
 
-PERSONA_LORA = r"D:\Task_design\personality\FinTune\outputs\qwen7b-lora-persona-will_full\checkpoint-32899"
-SCENE_LORA   = r"D:\Task_design\Scene\outputs\qwen7b-lora-will_half_fp16_v2\checkpoint-35821"
-TOPIC_LORA   = r"D:\Task_design\Topic\willingness_train\outputs\qwen7b-lora-topic_willingness\checkpoint-2500"
+# 从 Hugging Face 加载 LoRA 适配器
+PERSONA_LORA = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
+SCENE_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
+TOPIC_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
 ```
+
+**注意：** 如果使用本地路径，请确保模型文件已下载到本地。
 
 ### 配置OpenAI API（ChatGPT系统）
 
@@ -489,17 +500,9 @@ MAX_TOKENS = 80               # 最大token数
 - `my-chat-app2/TEST_GUIDE.md` - 多窗口测试指南
 - `my-chat-app2ChatgptTest/启动指南.md` - ChatGPT系统启动说明
 
-## 📄 许可证
-
-（待添加）
-
-## 👥 贡献者
-
-（待添加）
-
 ## 📞 联系方式
 
-如有问题或建议，请提交Issue或联系项目维护者。
+如有问题或建议，请提交Issue或联系：**18611980615@88.com**
 
 ---
 
