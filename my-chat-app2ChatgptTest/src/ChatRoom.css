@@ -1,0 +1,219 @@
+/* ChatRoom.css — Blind Test Final */
+
+:root {
+  --bg0: #070a12;
+  --bg1: #0b1020;
+  --card: rgba(255, 255, 255, 0.055);
+  --card2: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.10);
+  --border2: rgba(255, 255, 255, 0.08);
+  --text: #e7eaf0;
+  --muted: rgba(231, 234, 240, 0.72);
+  --accent: rgba(56, 189, 248, 0.92);
+  --r12: 12px;
+  --r18: 18px;
+}
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg0), var(--bg1));
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  padding: 16px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 消息气泡完全去特征化 */
+.chat {
+  display: flex;
+  flex-direction: column;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--r18);
+  overflow: hidden;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.msg-row { display: flex; gap: 12px; align-items: flex-start; }
+.msg-row.user2 { flex-direction: row-reverse; }
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+}
+
+/* 所有人（左侧）颜色一致 */
+.msg-row.user1 .bubble {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
+}
+
+/* 自己（右侧）稍微区别但保持扁平 */
+.msg-row.user2 .bubble {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sender { font-size: 11px; opacity: 0.4; margin-bottom: 4px; }
+.text { font-size: 14px; line-height: 1.5; }
+
+/* 彻底移除调试和统计界面 */
+.meta, .tag, .status, .metric, .bar, .agent-avatar, .debug-toggle, .agent-popup, .scene-preview {
+  display: none !important;
+}
+
+/* 设置面板 */
+.agent-card {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--r18);
+  padding: 16px;
+}
+
+.settings-grid { 
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 10px; 
+}
+
+.field-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; display: block; }
+
+.settings-input {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.primary-btn {
+  width: 100%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.primary-btn:hover { opacity: 0.9; }
+
+.composer { padding: 15px; display: flex; gap: 10px; border-top: 1px solid var(--border); }
+.input { flex: 1; background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 10px; color: white; padding: 10px; }
+.input:disabled { cursor: not-allowed; opacity: 0.5; }
+.send { background: #333; color: white; border: none; padding: 0 20px; border-radius: 10px; cursor: pointer; }
+.send:disabled { cursor: not-allowed; opacity: 0.5; }
+
+/* 设置卡片和表单样式 */
+.setup-card {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: var(--r18);
+  padding: 24px;
+}
+
+.setup-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.settings-block {
+  margin-bottom: 16px;
+}
+
+.settings-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.settings-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.settings-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.settings-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.settings-input[type="textarea"],
+.settings-input textarea,
+textarea.settings-input {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.chat-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-topic {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.chat-topic strong {
+  color: var(--text);
+  font-weight: 600;
+}

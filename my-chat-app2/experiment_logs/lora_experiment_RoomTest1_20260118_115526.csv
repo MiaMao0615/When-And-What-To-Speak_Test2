@@ -1,0 +1,3 @@
+﻿房间ID,时间戳,序号,发言者类型,编号,用户ID,说话内容,最终Willingness,Persona分数,Scene分数,Topic分数,是否触发插话,Agent策略,Agent插话内容,Agent编号
+RoomTest1,2026-01-18 11:55:26,ROOM_INFO,房间信息,,system,实验房间ID: RoomTest1,,,,,,,,
+RoomTest1,2026-01-18 11:55:26,EXPERIMENT_END,实验结束,,system,实验已结束 (房间ID: RoomTest1),,,,,,,,
