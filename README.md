@@ -1,119 +1,119 @@
-# 聊天Agent实验平台 (test2)
+# Chat Agent Experiment Platform (test2)
 
-双系统聊天实验平台，支持LoRA和ChatGPT两种后端实现，用于多人对话场景下的AI Agent意愿预测与插话生成实验。
+A dual-system chat experiment platform supporting LoRA and ChatGPT backend implementations for multi-user dialogue scenarios with AI Agent willingness prediction and insertion generation experiments.
 
-## 🎯 项目简介
+## 🎯 Project Overview
 
-本项目是一个完整的**多人聊天实验平台**，包含两个独立的实验系统，支持双盲测试、实验数据收集和问卷功能。系统能够实时预测AI Agent的对话意愿（Willingness），当意愿值超过阈值时自动生成插话内容。
+This project is a complete **multi-user chat experiment platform** with two independent experimental systems, supporting double-blind testing, experimental data collection, and questionnaire functionality. The system can predict AI Agent dialogue willingness (Willingness) in real-time and automatically generate insertions when willingness exceeds the threshold.
 
-### 核心特性
+### Core Features
 
-- ✅ **双系统架构**：LoRA本地模型系统 + ChatGPT API系统
-- ✅ **多人聊天室**：支持多客户端同时加入同一房间
-- ✅ **双盲测试**：用户和Agent使用随机编号（1-100），隐藏真实身份
-- ✅ **实时意愿预测**：基于Persona/Scene/Topic三个维度的意愿值计算
-- ✅ **智能插话生成**：当意愿值超过阈值时自动生成插话
-- ✅ **实验数据自动记录**：所有对话和推理结果保存到CSV文件
-- ✅ **问卷功能**：实验结束后用户评分其他参与者是Agent的可能性
-- ✅ **实验统计**：自动生成实验统计结果和数据分析
+- ✅ **Dual System Architecture**: LoRA local model system + ChatGPT API system
+- ✅ **Multi-user Chat Room**: Supports multiple clients joining the same room simultaneously
+- ✅ **Double-blind Testing**: Users and Agents use random numbers (1-100) to hide real identities
+- ✅ **Real-time Willingness Prediction**: Calculates willingness values based on Persona/Scene/Topic dimensions
+- ✅ **Intelligent Insertion Generation**: Automatically generates insertions when willingness exceeds threshold
+- ✅ **Automatic Experimental Data Recording**: All conversations and inference results saved to CSV files
+- ✅ **Questionnaire Function**: After experiments, users rate the likelihood of other participants being Agents
+- ✅ **Experiment Statistics**: Automatically generates experiment statistics and data analysis
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 test2/
-├── backend/                          # 后端代码
-│   ├── Websocket.py                  # LoRA系统WebSocket服务器
-│   ├── WebsocketChatgpty.py          # ChatGPT系统WebSocket服务器
-│   ├── Core.py                       # LoRA推理核心
-│   └── CoreChatgpt.py                # ChatGPT推理核心
+├── backend/                          # Backend code
+│   ├── Websocket.py                  # LoRA system WebSocket server
+│   ├── WebsocketChatgpty.py          # ChatGPT system WebSocket server
+│   ├── Core.py                       # LoRA inference core
+│   └── CoreChatgpt.py                # ChatGPT inference core
 │
-├── my-chat-app2/                     # LoRA系统前端
-│   ├── src/                          # React源代码
-│   │   ├── App.jsx                   # 主应用组件
-│   │   ├── ChatRoom.css              # 聊天室样式
-│   │   └── main.jsx                  # 入口文件
-│   ├── package.json                  # 依赖配置
-│   ├── vite.config.js                # Vite配置
-│   ├── 启动后端.bat                  # 快速启动后端
-│   ├── 构建前端.bat                  # 快速构建前端
-│   ├── 启动前端服务.bat              # 快速启动前端服务
-│   ├── 完整启动指南.md               # 详细启动说明
-│   ├── 问卷功能说明.md               # 问卷功能文档
-│   └── TEST_GUIDE.md                 # 测试指南
+├── my-chat-app2/                     # LoRA system frontend
+│   ├── src/                          # React source code
+│   │   ├── App.jsx                   # Main application component
+│   │   ├── ChatRoom.css              # Chat room styles
+│   │   └── main.jsx                  # Entry file
+│   ├── package.json                  # Dependencies configuration
+│   ├── vite.config.js                # Vite configuration
+│   ├── 启动后端.bat                  # Quick start backend (batch file)
+│   ├── 构建前端.bat                  # Quick build frontend (batch file)
+│   ├── 启动前端服务.bat              # Quick start frontend service (batch file)
+│   ├── 完整启动指南.md               # Detailed startup guide
+│   ├── 问卷功能说明.md               # Questionnaire documentation
+│   └── TEST_GUIDE.md                 # Test guide
 │
-├── my-chat-app2ChatgptTest/          # ChatGPT系统前端
-│   ├── src/                          # React源代码
-│   ├── package.json                  # 依赖配置
-│   └── 启动指南.md                   # 启动说明
+├── my-chat-app2ChatgptTest/          # ChatGPT system frontend
+│   ├── src/                          # React source code
+│   ├── package.json                  # Dependencies configuration
+│   └── 启动指南.md                   # Startup guide
 │
-└── experiment_logs/                  # 实验日志目录（自动生成）
-    ├── lora_experiment_*.csv         # LoRA系统实验数据
-    └── chatgpt_experiment_*.csv      # ChatGPT系统实验数据
+└── experiment_logs/                  # Experiment logs directory (auto-generated)
+    ├── lora_experiment_*.csv         # LoRA system experiment data
+    └── chatgpt_experiment_*.csv      # ChatGPT system experiment data
 ```
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 前置要求
+### Prerequisites
 
-#### LoRA系统要求
+#### LoRA System Requirements
 - **Python 3.8+**
-- **CUDA支持的GPU**（推荐16GB+显存，也可使用CPU）
-- **PyTorch** 和 **CUDA工具包**
-- **Node.js 16+** 和 **npm**
+- **CUDA-enabled GPU** (16GB+ VRAM recommended, CPU also supported)
+- **PyTorch** and **CUDA toolkit**
+- **Node.js 16+** and **npm**
 
-#### ChatGPT系统要求
+#### ChatGPT System Requirements
 - **Python 3.8+**
-- **Node.js 16+** 和 **npm**
-- **OpenAI API Key**（需要配置环境变量）
+- **Node.js 16+** and **npm**
+- **OpenAI API Key** (needs to be configured as environment variable)
 
-### 安装依赖
+### Installation
 
-#### 后端依赖（Python）
+#### Backend Dependencies (Python)
 
 ```bash
 pip install torch transformers peft websockets openai
 ```
 
-#### 前端依赖（Node.js）
+#### Frontend Dependencies (Node.js)
 
-**LoRA系统前端：**
+**LoRA System Frontend:**
 ```bash
 cd my-chat-app2
 npm install
 ```
 
-**ChatGPT系统前端：**
+**ChatGPT System Frontend:**
 ```bash
 cd my-chat-app2ChatgptTest
 npm install
 ```
 
-### 配置模型路径（LoRA系统）
+### Configure Model Paths (LoRA System)
 
-模型已上传至 Hugging Face，可以直接使用：
+Models have been uploaded to Hugging Face and can be used directly:
 
-**Hugging Face 模型仓库：** [MiaMao/Autonomous-Insert-LoRA](https://huggingface.co/MiaMao/Autonomous-Insert-LoRA)
+**Hugging Face Model Repository:** [MiaMao/Autonomous-Insert-LoRA](https://huggingface.co/MiaMao/Autonomous-Insert-LoRA)
 
-**相关资源：**
-- **训练数据集：** [MiaMao/Autonomous-Insert-Data](https://huggingface.co/datasets/MiaMao/Autonomous-Insert-Data)
-- **完整运行时代码：** [Autonomous-Insert-Agent](https://github.com/MiaMao0615/Autonomous-Insert-Agent)
+**Related Resources:**
+- **Training Dataset:** [MiaMao/Autonomous-Insert-Data](https://huggingface.co/datasets/MiaMao/Autonomous-Insert-Data)
+- **Full Runtime Code:** [Autonomous-Insert-Agent](https://github.com/MiaMao0615/Autonomous-Insert-Agent)
 
-编辑 `backend/Core.py`，使用 Hugging Face 模型路径：
+Edit `backend/Core.py` to use Hugging Face model paths:
 
 ```python
-BASE_MODEL = "Qwen/Qwen2.5-7B-Instruct"  # 或使用本地路径
+BASE_MODEL = "Qwen/Qwen2.5-7B-Instruct"  # Or use local path
 
-# 从 Hugging Face 加载 LoRA 适配器
-PERSONA_LORA = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
-SCENE_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
-TOPIC_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # 或使用本地路径
+# Load LoRA adapters from Hugging Face
+PERSONA_LORA = "MiaMao/Autonomous-Insert-LoRA"  # Or use local path
+SCENE_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # Or use local path
+TOPIC_LORA   = "MiaMao/Autonomous-Insert-LoRA"  # Or use local path
 ```
 
-**注意：** 如果使用本地路径，请确保模型文件已下载到本地。
+**Note:** If using local paths, ensure model files are downloaded locally.
 
-### 配置OpenAI API（ChatGPT系统）
+### Configure OpenAI API (ChatGPT System)
 
-设置环境变量：
+Set environment variables:
 
 ```bash
 # Windows
@@ -123,204 +123,204 @@ set OPENAI_API_KEY=your_api_key_here
 export OPENAI_API_KEY=your_api_key_here
 ```
 
-或在代码中直接配置：
+Or configure directly in code:
 
 ```python
 # backend/CoreChatgpt.py
 client = OpenAI(api_key="your_api_key")
 ```
 
-## 📖 详细使用指南
+## 📖 Detailed Usage Guide
 
-### LoRA系统启动流程
+### LoRA System Startup Process
 
-#### 方法1：使用批处理文件（推荐）
+#### Method 1: Using Batch Files (Recommended)
 
-1. **构建前端**
+1. **Build Frontend**
    ```bash
    cd my-chat-app2
-   # 双击运行：构建前端.bat
-   # 或手动运行：npm run build
+   # Double-click: 构建前端.bat
+   # Or manually run: npm run build
    ```
 
-2. **启动后端**
+2. **Start Backend**
    ```bash
-   # 双击运行：启动后端.bat
-   # 或手动运行：python backend/Websocket.py
+   # Double-click: 启动后端.bat
+   # Or manually run: python backend/Websocket.py
    ```
 
-3. **启动前端服务**
+3. **Start Frontend Service**
    ```bash
-   # 双击运行：启动前端服务.bat
-   # 或手动运行：npx serve dist -l 5173 --cors
+   # Double-click: 启动前端服务.bat
+   # Or manually run: npx serve dist -l 5173 --cors
    ```
 
-4. **访问应用**
-   - 浏览器打开：`http://localhost:5173`
-   - 或使用网络IP（多设备访问）：`http://192.168.x.x:5173`
+4. **Access Application**
+   - Open browser: `http://localhost:5173`
+   - Or use network IP (for multi-device access): `http://192.168.x.x:5173`
 
-#### 方法2：手动命令行启动
+#### Method 2: Manual Command Line Startup
 
 ```bash
-# 终端1：启动后端
+# Terminal 1: Start backend
 cd test2
 python backend/Websocket.py
 
-# 终端2：构建并启动前端
+# Terminal 2: Build and start frontend
 cd my-chat-app2
 npm run build
 npx serve dist -l 5173 --cors
 ```
 
-详细步骤请参考 `my-chat-app2/完整启动指南.md`
+For detailed steps, refer to `my-chat-app2/完整启动指南.md`
 
-### ChatGPT系统启动流程
+### ChatGPT System Startup Process
 
-1. **构建前端**
+1. **Build Frontend**
    ```bash
    cd my-chat-app2ChatgptTest
    npm run build
    ```
 
-2. **启动后端**
+2. **Start Backend**
    ```bash
    cd test2
    python backend/WebsocketChatgpty.py
    ```
 
-3. **启动前端服务**
+3. **Start Frontend Service**
    ```bash
    cd my-chat-app2ChatgptTest
    npx serve dist -l 5174 --cors
    ```
 
-4. **访问应用**
-   - 浏览器打开：`http://localhost:5174`
+4. **Access Application**
+   - Open browser: `http://localhost:5174`
 
-## 🔧 系统功能说明
+## 🔧 System Features
 
-### 1. 用户加入流程
+### 1. User Join Process
 
-1. **填写个人信息**
-   - 昵称（Nickname）
-   - 简介（Introduction）
-   - 人格特征（Persona Profile）
+1. **Fill Personal Information**
+   - Nickname
+   - Introduction
+   - Persona Profile
 
-2. **加入聊天室**
-   - 系统随机分配编号（1-100）
-   - 显示：`您的编号：#42`
-   - 所有用户和Agent都使用编号标识
+2. **Join Chat Room**
+   - System randomly assigns a number (1-100)
+   - Display: `Your Number: #42`
+   - All users and Agents are identified by numbers
 
-3. **开始对话**
-   - 用户发送消息，系统实时计算意愿值
-   - 当 `final_willingness > threshold` 时，Agent自动插话
+3. **Start Conversation**
+   - Users send messages, system calculates willingness values in real-time
+   - When `final_willingness > threshold`, Agent automatically inserts
 
-### 2. 意愿预测机制
+### 2. Willingness Prediction Mechanism
 
-系统使用三个LoRA模型分别计算意愿值：
+The system uses three LoRA models to calculate willingness values separately:
 
-- **Persona Willingness**: 基于用户人格特征
-- **Scene Willingness**: 基于对话场景
-- **Topic Willingness**: 基于对话话题
+- **Persona Willingness**: Based on user personality traits
+- **Scene Willingness**: Based on dialogue scenario
+- **Topic Willingness**: Based on dialogue topic
 
-最终意愿值计算公式：
+Final willingness calculation formula:
 ```
 final_willingness = (w_p * p_val + w_s * s_val + w_t * t_val) / (w_p + w_s + w_t)
 ```
 
-### 3. 插话生成策略
+### 3. Insertion Generation Strategy
 
-当 `final_willingness > 0.60`（LoRA系统）或超过ChatGPT判断阈值时：
+When `final_willingness > 0.60` (LoRA system) or exceeds ChatGPT judgment threshold:
 
-- **LoRA系统**：调用ChatGPT生成插话（不加载Strategy分类模型）
-- **ChatGPT系统**：直接使用ChatGPT判断并生成插话
+- **LoRA System**: Calls ChatGPT to generate insertion (does not load Strategy classification model)
+- **ChatGPT System**: Directly uses ChatGPT to judge and generate insertion
 
-插话要求：
-- 简短自然，不超过80 tokens
-- 不重复用户原话
-- 不包含疑问句
-- 符合对话场景
+Insertion requirements:
+- Short and natural, no more than 80 tokens
+- Does not repeat user's original words
+- Does not contain interrogative sentences
+- Fits dialogue scenario
 
-### 4. 实验数据记录
+### 4. Experimental Data Recording
 
-系统自动将所有数据记录到CSV文件：
+System automatically records all data to CSV files:
 
-**LoRA系统CSV格式：**
+**LoRA System CSV Format:**
 ```csv
-房间ID,时间戳,序号,发言者类型,编号,用户ID,说话内容,
-最终Willingness,Persona分数,Scene分数,Topic分数,
-是否触发插话,Agent策略,Agent插话内容,Agent编号
+Room ID,Timestamp,Sequence,Speaker Type,Number,User ID,Content,
+Final Willingness,Persona Score,Scene Score,Topic Score,
+Triggered,Agent Strategy,Agent Insertion,Agent Number
 ```
 
-**ChatGPT系统CSV格式：**
+**ChatGPT System CSV Format:**
 ```csv
-房间ID,时间戳,序号,发言者类型,编号,用户ID,说话内容,
-Agent判断分数,是否触发插话,Agent策略,Agent插话内容,Agent编号
+Room ID,Timestamp,Sequence,Speaker Type,Number,User ID,Content,
+Agent Judgment Score,Triggered,Agent Strategy,Agent Insertion,Agent Number
 ```
 
-### 5. 问卷功能
+### 5. Questionnaire Function
 
-实验结束后自动进入问卷阶段：
+Automatically enters questionnaire phase after experiment ends:
 
-1. **问卷触发**：主持人点击"结束实验"按钮
-2. **评分界面**：用户对其他所有参与者评分（1-10分）
-   - 1分 = 非常确定不是Agent
-   - 10分 = 非常确定是Agent
-3. **问卷进度**：显示完成进度（已完成人数/总人数）
-4. **统计结果**：所有用户完成后显示实验统计
+1. **Questionnaire Trigger**: Host clicks "End Experiment" button
+2. **Rating Interface**: Users rate all other participants (1-10 points)
+   - 1 point = Very certain not an Agent
+   - 10 points = Very certain is an Agent
+3. **Questionnaire Progress**: Shows completion progress (completed/total)
+4. **Statistics Results**: Shows experiment statistics after all users complete
 
-### 6. 多设备访问
+### 6. Multi-device Access
 
-支持同一WiFi网络下的多设备同时访问：
+Supports simultaneous access from multiple devices on the same WiFi network:
 
-1. **获取服务器IP**
+1. **Get Server IP**
    ```bash
    ipconfig  # Windows
    ifconfig  # Linux/Mac
    ```
 
-2. **在其他设备访问**
-   - 确保设备连接到同一WiFi
-   - 浏览器访问：`http://192.168.x.x:5173`（LoRA系统）
-   - 或：`http://192.168.x.x:5174`（ChatGPT系统）
+2. **Access from Other Devices**
+   - Ensure devices are connected to the same WiFi
+   - Browser access: `http://192.168.x.x:5173` (LoRA system)
+   - Or: `http://192.168.x.x:5174` (ChatGPT system)
 
-## ⚙️ 配置参数
+## ⚙️ Configuration Parameters
 
-### LoRA系统配置 (`backend/Core.py`)
-
-```python
-MAX_LENGTH = 256              # 文本最大长度
-THRESHOLD = 0.60              # 意愿值阈值（超过此值触发插话）
-HISTORY_N = 12                # 上下文历史句子数
-GPU_QUEUE_MAX = 300           # 推理队列上限
-```
-
-### WebSocket配置 (`backend/Websocket.py`)
+### LoRA System Configuration (`backend/Core.py`)
 
 ```python
-WS_LOG = True                 # 服务端日志开关
-HISTORY_N = 12                # 最近N句作为上下文
-MAX_HISTORY = 100             # 历史最多保留
+MAX_LENGTH = 256              # Maximum text length
+THRESHOLD = 0.60              # Willingness threshold (triggers insertion when exceeded)
+HISTORY_N = 12                # Context history sentence count
+GPU_QUEUE_MAX = 300           # Inference queue limit
 ```
 
-### ChatGPT系统配置 (`backend/CoreChatgpt.py`)
+### WebSocket Configuration (`backend/Websocket.py`)
 
 ```python
-OPENAI_MODEL = "gpt-4o-mini-2024-07-18"  # 使用的模型
-TEMPERATURE = 0.7             # 生成温度
-MAX_TOKENS = 80               # 最大token数
+WS_LOG = True                 # Server log switch
+HISTORY_N = 12                # Recent N sentences as context
+MAX_HISTORY = 100             # Maximum history retention
 ```
 
-## 📊 WebSocket协议
+### ChatGPT System Configuration (`backend/CoreChatgpt.py`)
 
-### 客户端 → 服务器
+```python
+OPENAI_MODEL = "gpt-4o-mini-2024-07-18"  # Model used
+TEMPERATURE = 0.7             # Generation temperature
+MAX_TOKENS = 80               # Maximum token count
+```
 
-#### 1. 加入房间 (join)
+## 📊 WebSocket Protocol
+
+### Client → Server
+
+#### 1. Join Room (join)
 ```json
 {
   "type": "join",
-  "nickname": "张三",
-  "intro": "我是一个喜欢帮助别人的人",
+  "nickname": "Alice",
+  "intro": "I am someone who likes to help others",
   "persona_profile": {
     "background": "...",
     "personality_traits": ["empathetic", "supportive"],
@@ -331,32 +331,32 @@ MAX_TOKENS = 80               # 最大token数
 }
 ```
 
-#### 2. 发送消息 (chat_line)
+#### 2. Send Message (chat_line)
 ```json
 {
   "type": "chat_line",
-  "text": "大家好！"
+  "text": "Hello everyone!"
 }
 ```
 
-#### 3. 设置场景 (scene_fields)
+#### 3. Set Scene (scene_fields)
 ```json
 {
   "type": "scene_fields",
   "fields": {
-    "time_of_day": "深夜",
-    "formality": "非正式",
-    "domain": "情感交流",
-    "relationship": "朋友",
-    "topic_sensitivity": "中等",
-    "participants": "3-5人",
-    "ai_preference": "支持型",
-    "platform": "卧室"
+    "time_of_day": "late night",
+    "formality": "informal",
+    "domain": "emotional exchange",
+    "relationship": "friends",
+    "topic_sensitivity": "medium",
+    "participants": "3-5 people",
+    "ai_preference": "supportive",
+    "platform": "bedroom"
   }
 }
 ```
 
-#### 4. 设置话题 (topic)
+#### 4. Set Topic (topic)
 ```json
 {
   "type": "topic",
@@ -364,7 +364,7 @@ MAX_TOKENS = 80               # 最大token数
 }
 ```
 
-#### 5. 提交问卷 (questionnaire_answer)
+#### 5. Submit Questionnaire (questionnaire_answer)
 ```json
 {
   "type": "questionnaire_answer",
@@ -376,9 +376,9 @@ MAX_TOKENS = 80               # 最大token数
 }
 ```
 
-### 服务器 → 客户端
+### Server → Client
 
-#### 1. 聊天确认 (chat_ack)
+#### 1. Chat Acknowledgment (chat_ack)
 ```json
 {
   "type": "chat_ack",
@@ -387,25 +387,25 @@ MAX_TOKENS = 80               # 最大token数
 }
 ```
 
-#### 2. 消息更新 (chat_update)
+#### 2. Message Update (chat_update)
 ```json
 {
   "type": "chat_update",
   "seq": 1,
   "status": "done",
-  "text": "大家好！",
+  "text": "Hello everyone!",
   "user_id": "u_abc123",
-  "nickname": "张三",
+  "nickname": "Alice",
   "display_number": 42,
   "final_willingness": 0.72,
   "triggered": true,
-  "agent_text": "很高兴认识大家！",
+  "agent_text": "Nice to meet everyone!",
   "agent_strategy": "comforting",
   "agent_number": 58
 }
 ```
 
-#### 3. 实验统计 (experiment_stats)
+#### 3. Experiment Statistics (experiment_stats)
 ```json
 {
   "type": "experiment_stats",
@@ -420,90 +420,90 @@ MAX_TOKENS = 80               # 最大token数
 }
 ```
 
-## 🐛 故障排除
+## 🐛 Troubleshooting
 
-### 问题1：模型加载失败
+### Issue 1: Model Loading Failure
 
-**症状**：后端启动时报错，无法加载LoRA模型
+**Symptoms**: Backend startup error, unable to load LoRA model
 
-**解决方案**：
-- 检查模型路径是否正确
-- 确认LoRA检查点文件完整
-- 验证CUDA/PyTorch版本兼容性
-- 检查GPU显存是否足够
+**Solutions**:
+- Check if model paths are correct
+- Verify LoRA checkpoint files are complete
+- Verify CUDA/PyTorch version compatibility
+- Check if GPU memory is sufficient
 
-### 问题2：WebSocket连接失败
+### Issue 2: WebSocket Connection Failure
 
-**症状**：前端显示"连接失败"或无法接收消息
+**Symptoms**: Frontend shows "Connection failed" or cannot receive messages
 
-**解决方案**：
-- 确认后端服务器正在运行
-- 检查防火墙设置（端口8765需要开放）
-- 确认前端访问地址正确
-- 查看浏览器控制台（F12）错误信息
+**Solutions**:
+- Confirm backend server is running
+- Check firewall settings (port 8765 needs to be open)
+- Verify frontend access address is correct
+- Check browser console (F12) for error messages
 
-### 问题3：OpenAI API调用失败
+### Issue 3: OpenAI API Call Failure
 
-**症状**：ChatGPT系统无法生成插话
+**Symptoms**: ChatGPT system cannot generate insertions
 
-**解决方案**：
-- 检查环境变量 `OPENAI_API_KEY` 是否设置
-- 验证API密钥有效性
-- 确认网络连接正常
-- 检查API额度是否充足
+**Solutions**:
+- Check if environment variable `OPENAI_API_KEY` is set
+- Verify API key validity
+- Confirm network connection is normal
+- Check if API quota is sufficient
 
-### 问题4：多设备无法访问
+### Issue 4: Multi-device Access Failure
 
-**症状**：其他设备无法打开前端页面
+**Symptoms**: Other devices cannot open frontend page
 
-**解决方案**：
-- 确认所有设备在同一WiFi网络
-- 检查防火墙是否阻止端口5173/5174
-- 验证服务器IP地址是否正确
-- 尝试使用 `0.0.0.0` 而不是 `localhost` 启动服务
+**Solutions**:
+- Ensure all devices are on the same WiFi network
+- Check if firewall is blocking ports 5173/5174
+- Verify server IP address is correct
+- Try using `0.0.0.0` instead of `localhost` to start service
 
-### 问题5：问卷功能异常
+### Issue 5: Questionnaire Function Anomaly
 
-**症状**：问卷无法提交或进度不更新
+**Symptoms**: Questionnaire cannot be submitted or progress does not update
 
-**解决方案**：
-- 确认所有用户已完成"加入房间"步骤
-- 检查后端日志查看问卷状态
-- 确认用户编号正确记录
-- 刷新页面重新加入
+**Solutions**:
+- Ensure all users have completed the "Join Room" step
+- Check backend logs for questionnaire status
+- Verify user numbers are correctly recorded
+- Refresh page and rejoin
 
-## 📝 开发说明
+## 📝 Development Notes
 
-### 代码架构
+### Code Architecture
 
-**后端架构：**
-- `Websocket.py` / `WebsocketChatgpty.py`：WebSocket服务器，处理连接和消息路由
-- `Core.py` / `CoreChatgpt.py`：推理核心，执行意愿预测和插话生成
+**Backend Architecture:**
+- `Websocket.py` / `WebsocketChatgpty.py`: WebSocket server, handles connections and message routing
+- `Core.py` / `CoreChatgpt.py`: Inference core, performs willingness prediction and insertion generation
 
-**前端架构：**
-- React + Vite构建
-- WebSocket客户端实时通信
-- 状态管理：聊天历史、用户信息、实验状态
+**Frontend Architecture:**
+- Built with React + Vite
+- Real-time WebSocket client communication
+- State management: chat history, user information, experiment status
 
-### 扩展建议
+### Extension Suggestions
 
-- 支持更多策略类型
-- 添加历史对话上下文管理
-- 实现多轮对话意图识别
-- 添加性能监控和统计图表
-- 支持实验配置导出/导入
+- Support more strategy types
+- Add historical dialogue context management
+- Implement multi-turn dialogue intent recognition
+- Add performance monitoring and statistics charts
+- Support experiment configuration export/import
 
-## 📄 相关文档
+## 📄 Related Documentation
 
-- `my-chat-app2/完整启动指南.md` - LoRA系统详细启动说明
-- `my-chat-app2/问卷功能说明.md` - 问卷功能详细文档
-- `my-chat-app2/TEST_GUIDE.md` - 多窗口测试指南
-- `my-chat-app2ChatgptTest/启动指南.md` - ChatGPT系统启动说明
+- `my-chat-app2/完整启动指南.md` - LoRA system detailed startup guide
+- `my-chat-app2/问卷功能说明.md` - Questionnaire function documentation
+- `my-chat-app2/TEST_GUIDE.md` - Multi-window testing guide
+- `my-chat-app2ChatgptTest/启动指南.md` - ChatGPT system startup guide
 
-## 📞 联系方式
+## 📞 Contact
 
-如有问题或建议，请提交Issue或联系：**18611980615@88.com**
+For questions or suggestions, please submit an Issue or contact: **18611980615@88.com**
 
 ---
 
-**注意**：本项目用于学术研究目的，请确保遵守相关伦理规范和隐私保护要求。
+**Note**: This project is for academic research purposes. Please ensure compliance with relevant ethical standards and privacy protection requirements.
